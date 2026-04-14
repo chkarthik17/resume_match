@@ -20,7 +20,7 @@ async function bootstrap() {
     res.sendFile(path.join(publicDir, 'index.html'));
   });
 
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
   console.log(`\nResume Matcher Nest API running at http://localhost:${port}`);
   console.log(`API docs: http://localhost:${port}/api/docs\n`);
 }
