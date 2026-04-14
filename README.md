@@ -100,7 +100,8 @@ http://localhost:3000
 - Add `DIRECT_DATABASE_URL` for Prisma CLI commands such as `db pull` and `db push`.
 - The build already runs `prisma generate` before TypeScript compilation.
 - After setting `DATABASE_URL`, run `npm run db:push` against Neon to create or sync the tables.
-- Use Neon’s pooled connection string, and keep `sslmode=require&channel_binding=require`.
+- Use Neon's pooled connection string for the app, and the direct connection string for Prisma CLI.
+- If the database is waking from idle, the longer connect timeout helps reduce immediate `P1001` failures.
 - If Prisma still throws `P1001`, make sure the Neon compute is active and not paused.
 - Vercel should use `public` as the output directory after `npm run build`.
 
