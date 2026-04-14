@@ -97,6 +97,7 @@ http://localhost:3000
 ## Deployment
 
 - Add `DATABASE_URL` to your Vercel project environment variables.
+- Add `DIRECT_DATABASE_URL` for Prisma CLI commands such as `db pull` and `db push`.
 - The build already runs `prisma generate` before TypeScript compilation.
 - After setting `DATABASE_URL`, run `npm run db:push` against Neon to create or sync the tables.
 - Use Neon’s pooled connection string, and keep `sslmode=require&channel_binding=require`.
