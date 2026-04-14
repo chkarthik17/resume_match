@@ -7,10 +7,11 @@
     "start": "ts-node backend/nest/main.ts",
     "test": "npm run build",
     "dev": "ts-node backend/nest/main.ts",
-    "build": "tsc",
+    "build": "prisma generate && tsc",
     "start:prod": "node backend/dist/nest/main.js",
     "db:push": "prisma db push",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "keywords": [
     "resume",
