@@ -112,6 +112,8 @@ export class AppService {
   }
 
   async listResumes(limit = 50) {
+    if (!this.prisma.isEnabled()) return [];
+
     return this.prisma.resume.findMany({
       orderBy: { createdAt: 'desc' },
       take: this.cleanLimit(limit),
@@ -129,10 +131,13 @@ export class AppService {
   }
 
   async getResume(id: string) {
+    if (!this.prisma.isEnabled()) return null;
     return this.prisma.resume.findUnique({ where: { id } });
   }
 
   async listJobs(limit = 50) {
+    if (!this.prisma.isEnabled()) return [];
+
     return this.prisma.jobDescription.findMany({
       orderBy: { createdAt: 'desc' },
       take: this.cleanLimit(limit),
@@ -140,6 +145,8 @@ export class AppService {
   }
 
   async listMatches(limit = 50) {
+    if (!this.prisma.isEnabled()) return [];
+
     const runs = await this.prisma.matchRun.findMany({
       orderBy: { createdAt: 'desc' },
       take: this.cleanLimit(limit),
@@ -160,6 +167,8 @@ export class AppService {
   }
 
   async getMatch(id: string) {
+    if (!this.prisma.isEnabled()) return null;
+
     return this.prisma.matchRun.findUnique({
       where: { id },
       include: {

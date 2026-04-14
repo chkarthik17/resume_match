@@ -290,6 +290,12 @@
 <script>
 let jdCount = 0;
 
+const API_BASE_URL = window.API_BASE_URL || (
+  [''localhost'', ''127.0.0.1''].includes(window.location.hostname)
+    ? ''''
+    : ''https://resumematch-production-9545.up.railway.app''
+);
+
 // ── Drop zone ──────────────────────────────────────────────────────────────
 const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('resumeFile');
@@ -355,7 +361,7 @@ async function runMatch() {
   form.append('jds', JSON.stringify(jds));
 
   try {
-    const res = await fetch('/api/match', { method: 'POST', body: form });
+    const res = await fetch(${API_BASE_URL}/api/match, { method: 'POST', body: form });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Server error');
     renderResults(data);
