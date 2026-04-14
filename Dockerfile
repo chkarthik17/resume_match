@@ -4,6 +4,8 @@ WORKDIR /app
 
 # Install dependencies first (layer cache)
 COPY package*.json ./
+COPY prisma.config.ts ./
+COPY backend/prisma ./backend/prisma
 RUN npm ci
 
 # Copy source
