@@ -1,0 +1,46 @@
+{
+  "name": "resume-matcher",
+  "version": "1.0.0",
+  "description": "Rule-based Resume Parsing and Job Matching System",
+  "main": "backend/dist/nest/main.js",
+  "scripts": {
+    "start": "ts-node backend/nest/main.ts",
+    "test": "npm run build",
+    "dev": "ts-node backend/nest/main.ts",
+    "build": "tsc",
+    "start:prod": "node backend/dist/nest/main.js",
+    "db:push": "prisma db push",
+    "prisma:generate": "prisma generate"
+  },
+  "keywords": [
+    "resume",
+    "parsing",
+    "job-matching",
+    "nlp",
+    "rule-based"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@nestjs/common": "^11.1.19",
+    "@nestjs/core": "^11.1.19",
+    "@nestjs/platform-express": "^11.1.19",
+    "@prisma/adapter-pg": "^7.7.0",
+    "@prisma/client": "^7.7.0",
+    "dotenv": "^17.4.2",
+    "mammoth": "^1.12.0",
+    "multer": "^2.1.1",
+    "pdf-parse": "^2.4.5",
+    "pg": "^8.20.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.6.0",
+    "prisma": "^7.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  }
+}

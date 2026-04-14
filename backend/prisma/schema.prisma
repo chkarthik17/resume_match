@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Resume {
+  id              String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fileName        String?    @map("file_name")
+  candidateName   String     @map("candidate_name")
+  email           String?
+  phone           String?
+  yearsExperience Decimal?   @map("years_experience") @db.Decimal(5, 2)
+  resumeSkills    String[]   @default([]) @map("resume_skills")
+  rawText         String     @map("raw_text")
+  parsedJson      Json       @map("parsed_json")
+  createdAt       DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  matchRuns       MatchRun[]
+
+  @@index([createdAt(sort: Desc)], map: "idx_resumes_created_at")
+  @@map("resumes")
+}
+
+model JobDescription {
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  jobId           String        @map("job_id")
+  role            String?
+  aboutRole       String?       @map("about_role")
+  salary          String?
+  yearsExperience Decimal?      @map("years_experience") @db.Decimal(5, 2)
+  requiredSkills  String[]      @default([]) @map("required_skills")
+  optionalSkills  String[]      @default([]) @map("optional_skills")
+  allSkills       String[]      @default([]) @map("all_skills")
+  rawText         String        @map("raw_text")
+  parsedJson      Json          @map("parsed_json")
+  createdAt       DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  matchResults    MatchResult[]
+
+  @@index([jobId], map: "idx_job_descriptions_job_id")
+  @@index([createdAt(sort: Desc)], map: "idx_job_descriptions_created_at")
+  @@map("job_descriptions")
+}
+
+model MatchRun {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  resumeId    String        @map("resume_id") @db.Uuid
+  outputJson  Json          @map("output_json")
+  createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  resume      Resume        @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  results     MatchResult[]
+
+  @@index([createdAt(sort: Desc)], map: "idx_match_runs_created_at")
+  @@map("match_runs")
+}
+
+model MatchResult {
+  id                 String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  matchRunId         String         @map("match_run_id") @db.Uuid
+  jobDescriptionId   String         @map("job_description_id") @db.Uuid
+  jobId              String         @map("job_id")
+  role               String?
+  salary             String?
+  yearsExperience    Decimal?       @map("years_experience") @db.Decimal(5, 2)
+  aboutRole          String?        @map("about_role")
+  matchingScore      Int            @map("matching_score")
+  matchedSkillCount  Int            @default(0) @map("matched_skill_count")
+  totalJdSkills      Int            @default(0) @map("total_jd_skills")
+  skillsAnalysis     Json           @default("[]") @map("skills_analysis")
+  createdAt          DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  matchRun           MatchRun       @relation(fields: [matchRunId], references: [id], onDelete: Cascade)
+  jobDescription     JobDescription @relation(fields: [jobDescriptionId], references: [id], onDelete: Cascade)
+
+  @@index([matchRunId], map: "idx_match_results_run")
+  @@index([matchingScore(sort: Desc)], map: "idx_match_results_score")
+  @@map("match_results")
+}
