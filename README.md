@@ -101,6 +101,7 @@ http://localhost:3000
 - After setting `DATABASE_URL`, run `npm run db:push` against Neon to create or sync the tables.
 - Use Neon’s pooled connection string, and keep `sslmode=require&channel_binding=require`.
 - If Prisma still throws `P1001`, make sure the Neon compute is active and not paused.
+- Vercel should use `public` as the output directory after `npm run build`.
 
 ## API
 
