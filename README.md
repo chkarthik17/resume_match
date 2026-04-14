@@ -67,13 +67,7 @@ Create a `.env` file:
 
 ```env
 PORT=3000
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=resume
-DB_USER=postgres
-DB_PASSWORD=*****
-DATABASE_SSL=false
-DB_POOL_MAX=10
+DATABASE_URL=postgresql://USER:PASSWORD@HOST-pooler.REGION.aws.neon.tech/DB_NAME?sslmode=require&channel_binding=require
 ```
 
 Sync the Prisma schema:
@@ -99,6 +93,14 @@ Open:
 ```txt
 http://localhost:3000
 ```
+
+## Deployment
+
+- Add `DATABASE_URL` to your Vercel project environment variables.
+- The build already runs `prisma generate` before TypeScript compilation.
+- After setting `DATABASE_URL`, run `npm run db:push` against Neon to create or sync the tables.
+- Use Neon’s pooled connection string, and keep `sslmode=require&channel_binding=require`.
+- If Prisma still throws `P1001`, make sure the Neon compute is active and not paused.
 
 ## API
 
@@ -132,6 +134,13 @@ Created from `backend/prisma/schema.prisma`:
 - `match_runs`
 - `match_results`
 
+Prisma models:
+
+- `Resume`
+- `JobDescription`
+- `MatchRun`
+- `MatchResult`
+
 ## Scripts
 
 | Script | Purpose |
@@ -145,6 +154,6 @@ Created from `backend/prisma/schema.prisma`:
 ## Notes
 
 - The frontend is static and lives in `frontend/index.html`.
-- The backend saves successful match runs to PostgreSQL when the database env vars are set.
+- The backend saves successful match runs to PostgreSQL when `DATABASE_URL` is set.
 - Compiled files are written to `backend/dist/`.
 - Store README screenshots in `docs/screenshots/` using the filenames referenced above.

@@ -45,7 +45,7 @@ export class AppService {
       return {
         enabled: false,
         connected: false,
-        message: 'Set DATABASE_URL or DB_HOST/DB_NAME/DB_USER to enable Postgres persistence.',
+        message: 'Set DATABASE_URL to enable Postgres persistence.',
       };
     }
 

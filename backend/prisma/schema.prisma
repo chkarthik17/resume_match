@@ -7,7 +7,7 @@ datasource db {
 }
 
 model Resume {
-  id              String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id              String     @id @default(uuid()) @db.Uuid
   fileName        String?    @map("file_name")
   candidateName   String     @map("candidate_name")
   email           String?
@@ -24,7 +24,7 @@ model Resume {
 }
 
 model JobDescription {
-  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id              String        @id @default(uuid()) @db.Uuid
   jobId           String        @map("job_id")
   role            String?
   aboutRole       String?       @map("about_role")
@@ -44,7 +44,7 @@ model JobDescription {
 }
 
 model MatchRun {
-  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id          String        @id @default(uuid()) @db.Uuid
   resumeId    String        @map("resume_id") @db.Uuid
   outputJson  Json          @map("output_json")
   createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
@@ -56,7 +56,7 @@ model MatchRun {
 }
 
 model MatchResult {
-  id                 String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id                 String         @id @default(uuid()) @db.Uuid
   matchRunId         String         @map("match_run_id") @db.Uuid
   jobDescriptionId   String         @map("job_description_id") @db.Uuid
   jobId              String         @map("job_id")
