@@ -48,13 +48,11 @@ resume-matcher/
 
 The screenshots below show the user flow from upload to final JSON output.
 
-![Home screen and JD entry](docs/screenshots/01-home-and-jd-entry.png)
+<img width="1632" height="918" alt="Screenshot 2026-04-14 113349" src="https://github.com/user-attachments/assets/783a1b7f-6e21-46d1-92c2-b3805c8e26cd" />
 
-![Candidate profile and job matches](docs/screenshots/02-match-results.png)
+<img width="1326" height="850" alt="Screenshot 2026-04-14 113415" src="https://github.com/user-attachments/assets/4814071d-08ca-4db3-addb-3a37238e2d2a" />
 
-![Detailed JD match breakdown](docs/screenshots/03-job-match-breakdown.png)
-
-![Full JSON output](docs/screenshots/04-json-output.png)
+<img width="1286" height="910" alt="Screenshot 2026-04-14 113438" src="https://github.com/user-attachments/assets/2bf1fb0f-2516-4148-ba75-178fe2a32a03" />
 
 ## Setup
 
